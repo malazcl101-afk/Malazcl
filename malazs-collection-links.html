@@ -120,14 +120,8 @@ function categoryFor(name) {
   return 'tech';
 }
 
-function asinFrom(raw) {
-  if (!raw) return '';
-  var m = raw.match(/\/dp\/([A-Z0-9]{10})/) || raw.match(/\/gp\/product\/([A-Z0-9]{10})/) || raw.match(/[?&]pd_rd_i=([A-Z0-9]{10})/);
-  return m ? m[1] : '';
-}
-
-function imgFor(asin) {
-  return asin ? 'https://images-na.ssl-images-amazon.com/images/P/' + asin + '.01.LZZZZZZZ.jpg' : '';
+function imgFor(url) {
+  return url && url.indexOf('http') === 0 ? url : '';
 }
 
 function makeThumb(src) {
@@ -172,7 +166,7 @@ function loadTab(sheetName, isKids) {
     if (start < 0) return;
     var data = JSON.parse(t.substring(start, end + 1));
     var rows = data.table.rows || [];
-    var nameIdx = 1, rawIdx = 3, linkIdx = 4;
+    var nameIdx = 1, rawIdx = 3, linkIdx = 4, imgIdx = -1;
     if (rows.length) {
       var h = rows[0].c || [];
       for (var j = 0; j < h.length; j++) {
@@ -180,15 +174,16 @@ function loadTab(sheetName, isKids) {
         if (hv.indexOf('product name') > -1) nameIdx = j;
         if (hv.indexOf('raw') > -1) rawIdx = j;
         if (hv.indexOf('affiliate') > -1) linkIdx = j;
+        if (hv.indexOf('image') > -1) imgIdx = j;
       }
     }
     for (var i = 0; i < rows.length; i++) {
       var c = rows[i].c || [];
       var name = c[nameIdx] && c[nameIdx].v ? String(c[nameIdx].v) : '';
-      var raw = c[rawIdx] && c[rawIdx].v ? String(c[rawIdx].v) : '';
       var link = c[linkIdx] && c[linkIdx].v ? String(c[linkIdx].v) : '';
+      var img = imgIdx > -1 && c[imgIdx] && c[imgIdx].v ? String(c[imgIdx].v) : '';
       if (!name || link.indexOf('http') !== 0) continue;
-      addPick(isKids ? 'kids' : categoryFor(name), name, link, imgFor(asinFrom(raw)));
+      addPick(isKids ? 'kids' : categoryFor(name), name, link, imgFor(img));
     }
   }).catch(function () {});
 }
