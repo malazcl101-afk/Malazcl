@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Malaz's Collection — Home Office Picks</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: Arial, Helvetica, sans-serif; background:#0f2233; color:#eaf4f8; padding:20px 14px 40px; }
+  .wrap { max-width:560px; margin:0 auto; }
+  h1 { font-size:25px; text-align:center; color:#ffffff; letter-spacing:1px; }
+  .tag { text-align:center; color:#7fd1c0; font-size:13px; margin:6px 0 16px; }
+  .tabs { position:sticky; top:0; background:#0f2233; padding:8px 0 10px; display:flex; flex-wrap:wrap; gap:8px; justify-content:center; z-index:10; }
+  .tab { background:#17374d; color:#cfe8ef; border:1px solid #2a5a74; border-radius:999px; padding:8px 14px; font-size:14px; cursor:pointer; }
+  .tab.active { background:#2a9d8f; border-color:#2a9d8f; color:#ffffff; font-weight:bold; }
+  .panel { display:none; padding-top:8px; }
+  .panel.active { display:block; }
+  a.pick { display:block; background:#17374d; border:1px solid #2a5a74; border-radius:12px; padding:14px 16px; margin-bottom:10px; color:#ffffff; text-decoration:none; font-size:16px; }
+  a.pick:hover { background:#1d435c; }
+  a.pick span { display:block; color:#9fc6d4; font-size:13px; margin-top:3px; }
+  .today { background:#134e4a; border:1px solid #2a9d8f; }
+  .today:hover { background:#17635c; }
+  .hint { text-align:center; color:#9fc6d4; font-size:13px; margin:4px 0 10px; }
+  .foot { text-align:center; color:#9fc6d4; font-size:12px; margin-top:28px; line-height:1.6; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>MALAZ'S COLLECTION</h1>
+  <p class="tag">Home office, desk setup and baby picks</p>
+
+  <div class="tabs">
+    <button class="tab active" onclick="showTab('home', this)">Home</button>
+    <button class="tab" onclick="showTab('desks', this)">Standing Desks</button>
+    <button class="tab" onclick="showTab('chairs', this)">Chairs</button>
+    <button class="tab" onclick="showTab('monitor', this)">Monitor and Lighting</button>
+    <button class="tab" onclick="showTab('gear', this)">Keyboards and Stands</button>
+    <button class="tab" onclick="showTab('tech', this)">Tech and Charging</button>
+    <button class="tab" onclick="showTab('comfort', this)">Comfort and Storage</button>
+    <button class="tab" onclick="showTab('kids', this)">Kids and Baby</button>
+  </div>
+
+  <div id="home" class="panel active">
+    <p class="hint">Pick a category above, or start with the latest pick</p>
+    <a class="pick today" href="https://amzn.to/4hWoTuQ">Latest Pick: VIVO Under Desk Drawer and Shelf<span>Hidden storage that keeps your desk clean</span></a>
+    <a class="pick" href="https://amzn.to/4dzrJTP">Best Seller: SHW 55 inch Electric Standing Desk</a>
+    <a class="pick" href="https://amzn.to/4y9qW3z">Most Loved: GABRYLLY Ergonomic Office Chair</a>
+    <a class="pick" href="https://amzn.to/4e1KEH4">Top Rated: Logitech MX Master 3S Wireless Mouse</a>
+  </div>
+
+  <div id="desks" class="panel">
+    <a class="pick" href="https://amzn.to/4dzrJTP">SHW 55 inch Electric Standing Desk</a>
+    <a class="pick" href="https://amzn.to/4j9kwxr">FlexiSpot EN1 Electric Standing Desk</a>
+    <a class="pick" href="https://amzn.to/4jeuEVN">ErGear 48 inch Height Adjustable Desk</a>
+    <a class="pick" href="https://amzn.to/4yIv2k0">FEZIBO 48 inch Electric Standing Desk</a>
+  </div>
+
+  <div id="chairs" class="panel">
+    <a class="pick" href="https://amzn.to/4y9qW3z">GABRYLLY Ergonomic Office Chair</a>
+    <a class="pick" href="https://amzn.to/47LW668">SIHOO M57 Ergonomic Chair</a>
+  </div>
+
+  <div id="monitor" class="panel">
+    <a class="pick" href="https://amzn.to/3WhKB3M">HUANUO Dual Monitor Stand</a>
+    <a class="pick" href="https://amzn.to/47NbXkS">HUANUO Single Monitor Arm for Ultrawide</a>
+    <a class="pick" href="https://amzn.to/4zr8wfC">Bamboo Monitor Stand with Storage</a>
+    <a class="pick" href="https://amzn.to/4zp4ZOM">BenQ ScreenBar Monitor Light</a>
+    <a class="pick" href="https://amzn.to/3Uex3pf">BenQ WIT e-Reading Desk Lamp</a>
+  </div>
+
+  <div id="gear" class="panel">
+    <a class="pick" href="https://amzn.to/3VSMaFn">Keychron K8 Pro Mechanical Keyboard</a>
+    <a class="pick" href="https://amzn.to/4e1KEH4">Logitech MX Master 3S Wireless Mouse</a>
+    <a class="pick" href="https://amzn.to/4yMylXy">Nulaxy Dual Rod Laptop Stand</a>
+    <a class="pick" href="https://amzn.to/47btJhy">Lamicall Adjustable Laptop Stand</a>
+  </div>
+
+  <div id="tech" class="panel">
+    <a class="pick" href="https://amzn.to/4hQZEKk">Logitech Brio 4K Webcam</a>
+    <a class="pick" href="https://amzn.to/4rVwYDc">Logitech C920x HD Pro Webcam</a>
+    <a class="pick" href="https://amzn.to/4zIhZPU">Anker 575 USB C Docking Station</a>
+    <a class="pick" href="https://amzn.to/4zFJ7ia">Anker MagGo 3 in 1 Charging Station</a>
+  </div>
+
+  <div id="comfort" class="panel">
+    <a class="pick" href="https://amzn.to/4jwQB2l">Everlasting Comfort Foot Rest</a>
+    <a class="pick" href="https://amzn.to/4hWoTuQ">VIVO Under Desk Drawer and Shelf</a>
+    <a class="pick" href="https://amzn.to/4e1vRMw">Under Desk Cable Management Tray Kit</a>
+    <a class="pick" href="https://amzn.to/4ycfS5u">Bamboo Desk Organizer with Drawers</a>
+  </div>
+
+  <div id="kids" class="panel">
+    <p class="hint">Crawling baby dresses, rompers and onesies, new picks land here automatically</p>
+  </div>
+
+  <p class="foot">As an Amazon Associate I earn from qualifying purchases. #ad #affiliate<br>Malaz's Collection</p>
+</div>
+<script>
+function showTab(id, btn) {
+  var panels = document.getElementsByClassName('panel');
+  for (var i = 0; i < panels.length; i++) { panels[i].classList.remove('active'); }
+  var tabs = document.getElementsByClassName('tab');
+  for (var j = 0; j < tabs.length; j++) { tabs[j].classList.remove('active'); }
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+var SHEET_ID = '1smnVEEeT-4BlIXl6MA4ZjOGIy-BQgUtkXuQKh3ZSk-I';
+
+function categoryFor(name) {
+  var n = name.toLowerCase();
+  if (n.indexOf('foot rest') > -1 || n.indexOf('cable') > -1 || n.indexOf('organizer') > -1 || n.indexOf('drawer') > -1 || n.indexOf('mat') > -1) return 'comfort';
+  if (n.indexOf('chair') > -1) return 'chairs';
+  if (n.indexOf('lamp') > -1 || n.indexOf('screenbar') > -1 || n.indexOf('monitor') > -1 || n.indexOf('light') > -1) return 'monitor';
+  if (n.indexOf('keyboard') > -1 || n.indexOf('mouse') > -1 || n.indexOf('laptop stand') > -1) return 'gear';
+  if (n.indexOf('standing desk') > -1 || n.indexOf('desk converter') > -1 || n.indexOf('height adjustable desk') > -1) return 'desks';
+  return 'tech';
+}
+
+function addPick(panelId, name, url) {
+  var panel = document.getElementById(panelId);
+  if (!panel) return;
+  var links = panel.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (links[i].href === url) return;
+  }
+  var a = document.createElement('a');
+  a.className = 'pick';
+  a.href = url;
+  a.textContent = name;
+  panel.appendChild(a);
+}
+
+function loadTab(sheetName, isKids) {
+  var url = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/gviz/tq?tqx=out:json&sheet=' + encodeURIComponent(sheetName);
+  fetch(url).then(function (r) { return r.text(); }).then(function (t) {
+    var start = t.indexOf('{');
+    var end = t.lastIndexOf('}');
+    if (start < 0) return;
+    var data = JSON.parse(t.substring(start, end + 1));
+    var rows = data.table.rows || [];
+    for (var i = 0; i < rows.length; i++) {
+      var c = rows[i].c || [];
+      var name = c[1] && c[1].v ? String(c[1].v) : '';
+      var link = c[4] && c[4].v ? String(c[4].v) : '';
+      if (!name || link.indexOf('http') !== 0) continue;
+      addPick(isKids ? 'kids' : categoryFor(name), name, link);
+    }
+  }).catch(function () {});
+}
+
+loadTab('Product Codes', false);
+loadTab('Kids Products', true);
+</script>
+</body>
+</html>
