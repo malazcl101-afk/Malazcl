@@ -15,7 +15,9 @@
   .tab.active { background:#2a9d8f; border-color:#2a9d8f; color:#ffffff; font-weight:bold; }
   .panel { display:none; padding-top:8px; }
   .panel.active { display:block; }
-  a.pick { display:block; background:#17374d; border:1px solid #2a5a74; border-radius:12px; padding:14px 16px; margin-bottom:10px; color:#ffffff; text-decoration:none; font-size:16px; }
+  a.pick { display:flex; align-items:center; gap:12px; background:#17374d; border:1px solid #2a5a74; border-radius:12px; padding:12px 14px; margin-bottom:10px; color:#ffffff; text-decoration:none; font-size:16px; }
+  a.pick img.thumb { width:78px; height:78px; object-fit:cover; border-radius:8px; background:#ffffff; flex:none; }
+  a.pick .txt { flex:1; }
   a.pick:hover { background:#1d435c; }
   a.pick span { display:block; color:#9fc6d4; font-size:13px; margin-top:3px; }
   .today { background:#134e4a; border:1px solid #2a9d8f; }
@@ -118,17 +120,47 @@ function categoryFor(name) {
   return 'tech';
 }
 
-function addPick(panelId, name, url) {
+function asinFrom(raw) {
+  if (!raw) return '';
+  var m = raw.match(/\/dp\/([A-Z0-9]{10})/) || raw.match(/\/gp\/product\/([A-Z0-9]{10})/) || raw.match(/[?&]pd_rd_i=([A-Z0-9]{10})/);
+  return m ? m[1] : '';
+}
+
+function imgFor(asin) {
+  return asin ? 'https://images-na.ssl-images-amazon.com/images/P/' + asin + '.01.LZZZZZZZ.jpg' : '';
+}
+
+function makeThumb(src) {
+  var img = document.createElement('img');
+  img.className = 'thumb';
+  img.src = src;
+  img.alt = '';
+  img.loading = 'lazy';
+  img.onerror = function () { img.style.display = 'none'; };
+  img.onload = function () { if (img.naturalWidth < 10) img.style.display = 'none'; };
+  return img;
+}
+
+function addPick(panelId, name, url, imgUrl) {
   var panel = document.getElementById(panelId);
   if (!panel) return;
   var links = panel.getElementsByTagName('a');
   for (var i = 0; i < links.length; i++) {
-    if (links[i].href === url) return;
+    if (links[i].href === url) {
+      if (imgUrl && !links[i].getElementsByTagName('img').length) {
+        links[i].insertBefore(makeThumb(imgUrl), links[i].firstChild);
+      }
+      return;
+    }
   }
   var a = document.createElement('a');
   a.className = 'pick';
   a.href = url;
-  a.textContent = name;
+  if (imgUrl) a.appendChild(makeThumb(imgUrl));
+  var s = document.createElement('span');
+  s.className = 'txt';
+  s.textContent = name;
+  a.appendChild(s);
   panel.appendChild(a);
 }
 
@@ -140,12 +172,23 @@ function loadTab(sheetName, isKids) {
     if (start < 0) return;
     var data = JSON.parse(t.substring(start, end + 1));
     var rows = data.table.rows || [];
+    var nameIdx = 1, rawIdx = 3, linkIdx = 4;
+    if (rows.length) {
+      var h = rows[0].c || [];
+      for (var j = 0; j < h.length; j++) {
+        var hv = h[j] && h[j].v ? String(h[j].v).toLowerCase() : '';
+        if (hv.indexOf('product name') > -1) nameIdx = j;
+        if (hv.indexOf('raw') > -1) rawIdx = j;
+        if (hv.indexOf('affiliate') > -1) linkIdx = j;
+      }
+    }
     for (var i = 0; i < rows.length; i++) {
       var c = rows[i].c || [];
-      var name = c[1] && c[1].v ? String(c[1].v) : '';
-      var link = c[4] && c[4].v ? String(c[4].v) : '';
+      var name = c[nameIdx] && c[nameIdx].v ? String(c[nameIdx].v) : '';
+      var raw = c[rawIdx] && c[rawIdx].v ? String(c[rawIdx].v) : '';
+      var link = c[linkIdx] && c[linkIdx].v ? String(c[linkIdx].v) : '';
       if (!name || link.indexOf('http') !== 0) continue;
-      addPick(isKids ? 'kids' : categoryFor(name), name, link);
+      addPick(isKids ? 'kids' : categoryFor(name), name, link, imgFor(asinFrom(raw)));
     }
   }).catch(function () {});
 }
