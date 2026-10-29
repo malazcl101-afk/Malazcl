@@ -1,3 +1,4 @@
+<!-- PATCH 2026-10-29: addPick used to dedupe on link alone, so all OLLULL variants sharing one affiliate link collapsed into the single panda card. It now dedupes on link + product name, so each variant renders as its own card. -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -140,7 +141,9 @@ function addPick(panelId, name, url, imgUrl) {
   if (!panel) return;
   var links = panel.getElementsByTagName('a');
   for (var i = 0; i < links.length; i++) {
-    if (links[i].href === url) {
+    // Strip the Home-panel label prefixes so a sheet row still matches its static card.
+    var existing = links[i].textContent.replace(/^(Latest Pick|Best Seller|Most Loved|Top Rated):\s*/, '');
+    if (links[i].href === url && existing === name) {
       if (imgUrl && !links[i].getElementsByTagName('img').length) {
         links[i].insertBefore(makeThumb(imgUrl), links[i].firstChild);
       }
