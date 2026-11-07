@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Malaz's Collection — Baby, Women's Fashion & Makeup Picks</title>
+<title>Malaz's Collection — Baby, Women's Fashion, Makeup & Skincare Picks</title>
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
   body { font-family: Arial, Helvetica, sans-serif; background:#0f2233; color:#eaf4f8; padding:20px 14px 40px; }
@@ -27,12 +27,13 @@
 <body>
 <div class="wrap">
   <h1>MALAZ'S COLLECTION</h1>
-  <p class="tag">Baby outfits, women's fashion and makeup picks, curated for shoppers in the US &amp; Canada</p>
+  <p class="tag">Baby outfits, women's fashion, makeup and skincare picks, curated for shoppers in the US &amp; Canada</p>
 
   <div class="tabs">
     <button class="tab active" onclick="showTab('kids', this)">Kids and Baby</button>
     <button class="tab" onclick="showTab('women', this)">Women's Clothing</button>
     <button class="tab" onclick="showTab('makeup', this)">Makeup &amp; Beauty</button>
+    <button class="tab" onclick="showTab('skincare', this)">Skincare</button>
   </div>
 
   <div id="kids" class="panel active">
@@ -45,6 +46,10 @@
 
   <div id="makeup" class="panel">
     <p class="hint">Makeup and beauty picks, new items land here automatically</p>
+  </div>
+
+  <div id="skincare" class="panel">
+    <p class="hint">Skincare picks, new items land here automatically</p>
   </div>
 
   <p class="foot">As an Amazon Associate I earn from qualifying purchases. #ad #affiliate<br>Malaz's Collection</p>
@@ -64,9 +69,13 @@ var SHEET_ID = '1smnVEEeT-4BlIXl6MA4ZjOGIy-BQgUtkXuQKh3ZSk-I';
 
 function womenPanelFor(name) {
   var n = name.toLowerCase();
-  var makeupWords = ['lipstick', 'lip gloss', 'lip tint', 'mascara', 'foundation', 'concealer', 'blush', 'eyeliner', 'eyeshadow', 'makeup', 'primer', 'setting spray', 'nail polish', 'serum', 'brush set', 'beauty'];
-  for (var i = 0; i < makeupWords.length; i++) {
-    if (n.indexOf(makeupWords[i]) > -1) return 'makeup';
+  var skinWords = ['skincare', 'skin care', 'holy hydration', 'face cream', 'cleanser', 'moisturizer', 'serum'];
+  for (var i = 0; i < skinWords.length; i++) {
+    if (n.indexOf(skinWords[i]) > -1) return 'skincare';
+  }
+  var makeupWords = ['lipstick', 'lip gloss', 'lip tint', 'lip oil', 'mascara', 'foundation', 'concealer', 'blush', 'eyeliner', 'eyeshadow', 'makeup', 'primer', 'setting spray', 'nail polish', 'brush set', 'beauty', 'gift set'];
+  for (var j = 0; j < makeupWords.length; j++) {
+    if (n.indexOf(makeupWords[j]) > -1) return 'makeup';
   }
   return 'women';
 }
